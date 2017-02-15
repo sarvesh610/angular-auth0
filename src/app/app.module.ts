@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { provideAuth, AuthHttp, AuthConfig } from 'angular2-jwt';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -11,7 +12,12 @@ import { routing, appRoutingProviders } from './app.routing';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { Auth } from './services/auth/auth.service';
+import { TestService } from './services/rest/test.service';
+import { SchoolsService } from './services/schools/schools.service'
 import { AuthGuard } from './app.guard';
+
+import { DropdownModule } from 'ng2-bootstrap/dropdown';
+import { AlertModule } from 'ng2-bootstrap/alert';
 /**
 Work-Around for the Error due to Auth0 below: (https://github.com/auth0/angular2-jwt/issues/258 Used Option 2)
 ========================================================================================================
@@ -39,7 +45,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    DropdownModule.forRoot(),
+    AlertModule.forRoot()
   ],
   providers: [
     appRoutingProviders,
@@ -49,7 +57,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       useFactory: authHttpServiceFactory,
       deps: [ Http, RequestOptions ]
     },
-    AuthGuard
+    AuthGuard,
+    TestService,
+    SchoolsService
   ],
   bootstrap: [AppComponent]
 })

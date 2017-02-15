@@ -1,2 +1,10 @@
-<div class="alert alert-success" *ngIf="auth.authenticated()">You are logged in!</div>
-<div class="alert alert-danger" *ngIf="!auth.authenticated()">You are not logged in!</div>
+<div *ngIf="auth.authenticated()">
+  <alert *ngIf="!auth.authenticated()" type="success">
+    <strong>Well done!</strong> You successfully logged in
+  </alert>
+</div>
+<div *ngIf="!auth.authenticated()">
+  <alert type="danger">
+    <strong>Oh snap!</strong> You aren't logged in.
+  </alert>
+</div>

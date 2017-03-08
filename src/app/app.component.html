@@ -1,38 +1,50 @@
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" routerLink="/">Livingston Public Schools</a>
-    </div>
-    <div id="navbar" class="collapse navbar-collapse">
-      <!--<ul class="nav navbar-nav">
-
-      </ul>-->
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Select School <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li *ngFor="let school of schools">
-              <a class="dropdown-item" href="{{school.id}}">{{school.name}}</a>
-            </li>
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Title</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <!-- Simple Select -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+          <input class="mdl-textfield__input" type="text" id="lps_school" value="Select School" readonly tabIndex="-1">
+          <label for="lps_school">
+            <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+          </label>
+          <label for="lps_school" class="mdl-textfield__label">schools</label>
+          <ul for="lps_school" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+            <li class="mdl-menu__item" *ngFor="let school of schools" (click)="getMenuFor(school.name)">{{school.name}}</li>
           </ul>
-        </li>
-        <li>
-          <a href="#" (click)="auth.login()" *ngIf="!auth.authenticated()">Login</a></li>
-        <li>
-          <a routerLink="/profile" *ngIf="auth.authenticated()" class="image-clrcle glyphicon glyphicon-user" style="width:100%"></a>
-        </li>
-        <li><a href="#" (click)="auth.logout()" *ngIf="auth.authenticated()">Logout</a></li>
-      </ul>
+        </div>
+        <button id="demo-menu-lower-left" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons red md-24">account_circle</i>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-left">
+          <li class="mdl-menu__item" (click)="auth.login()" *ngIf="!auth.authenticated()">Login</li>
+          <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" routerLink="/profile" *ngIf="auth.authenticated()">My Profile</li>
+          <li class="mdl-menu__item" (click)="auth.logout()" *ngIf="auth.authenticated()">Logout</li>
+        </ul>
+      </nav>
     </div>
-    <!--/.nav-collapse -->
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">LPS</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" *ngFor="let item of menuitems" href="item.route">{{item.name}}</a>
+      <!-- <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a> -->
+    </nav>
   </div>
-</nav>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <!-- Your content goes here -->
+    </div>
+  </main>
+</div>
 
 <div class="container">
   <router-outlet></router-outlet>

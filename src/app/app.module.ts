@@ -12,12 +12,18 @@ import { routing, appRoutingProviders } from './app.routing';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { Auth } from './services/auth/auth.service';
-import { TestService } from './services/rest/test.service';
+import { MenuService } from './services/menus/menu.service';
 import { SchoolsService } from './services/schools/schools.service'
 import { AuthGuard } from './app.guard';
 
 import { DropdownModule } from 'ng2-bootstrap/dropdown';
 import { AlertModule } from 'ng2-bootstrap/alert';
+
+import { MaterialModule } from '@angular/material';
+
+
+import 'hammerjs';
+
 /**
 Work-Around for the Error due to Auth0 below: (https://github.com/auth0/angular2-jwt/issues/258 Used Option 2)
 ========================================================================================================
@@ -40,6 +46,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     RegisterComponent,
     HomeComponent,
     ProfileComponent
+
   ],
   imports: [
     BrowserModule,
@@ -47,7 +54,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     HttpModule,
     routing,
     DropdownModule.forRoot(),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    MaterialModule
   ],
   providers: [
     appRoutingProviders,
@@ -58,7 +66,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       deps: [ Http, RequestOptions ]
     },
     AuthGuard,
-    TestService,
+    MenuService,
     SchoolsService
   ],
   bootstrap: [AppComponent]

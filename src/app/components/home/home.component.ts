@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '../../services/auth/auth.service'
-import { TestService } from '../../services/rest/test.service'
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -10,18 +9,11 @@ import { environment } from '../../../environments/environment';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private auth: Auth, private test: TestService) {
+  constructor(private auth: Auth) {
   }
 
   ngOnInit() {
-    console.log("inside init");
-    this.loadTest();
-  }
 
-  loadTest() {
-    this.test.getTest().subscribe((res) => {
-    console.log(res);
-    });
   }
 
 }
